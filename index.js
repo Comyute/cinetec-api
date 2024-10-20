@@ -2,12 +2,14 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 const peliculaRouter = require('./routers/peliculaRouter')
+const usuarioRouter = require('./routers/usuarioRouter')
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded())
 
 app.use("/pelicula", peliculaRouter)
+app.use("/usuario", usuarioRouter)
 
 const PORT = 3000
 

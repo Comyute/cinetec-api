@@ -16,7 +16,6 @@ const usuarioController = {
         try {
             const { nombres, apellidos, correo, contrasenia, activa } = req.body
 
-            console.log("Datos recibidos:",nombres + apellidos + correo + contrasenia);
             const sql = 'INSERT INTO tb_usuario (nombres, apellidos, correo, contrasenia, activa) VALUES ($1,$2,$3,$4,$5) RETURNING *'
             const { rows } = await pool.query(sql, [nombres, apellidos, correo, contrasenia, activa])
             res.json(rows[0])
@@ -135,6 +134,20 @@ const usuarioController = {
             res.status(500).json({
                 msg: "ERROR usuarioController: " + error.message
             })
+        }
+    },
+
+    createAdmin: async(req, res) =>{
+        try {
+            const { nombres, apellidos, correo, contrasenia } = req.body
+
+            const sql = 'INSERT INTO tb_usuarioadmin (nombres, apellidos, correo, contrasenia) VALUES ($1,$2,$3,$4) RETURNING *'
+            const { rows } = await pool.query(sql, [nombres, apellidos, correo, contrasenia])
+            res.json(rows[0])
+        } catch (error) {
+            res.status(500).json({
+                msg: "ERROR usuarioController: " + error.message
+            });
         }
     }
 

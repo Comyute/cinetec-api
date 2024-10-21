@@ -12,5 +12,6 @@ router.delete("/eliminar/:id",usuarioController.deleteById)
 router.put("/editarusuario/", usuarioController.updateById)
 router.put("/deshabilitar/:id", usuarioController.disableUser)
 router.get("/buscar/:id", usuarioController.findById)
+router.get("/registraradmin/",usuarioController.createAdmin)
 
 module.exports = router

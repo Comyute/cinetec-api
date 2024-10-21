@@ -16,7 +16,7 @@ const salaController = {
         try {
             const { idsala, disponibilidad } = req.body
             const sql = 'INSERT INTO tb_sala (idsala, disponibilidad) VALUES ($1,$2) RETURNING *'
-            const { rows } = await pool.query(sql, idsala, disponibilidad)
+            const { rows } = await pool.query(sql, [idsala, disponibilidad])
             res.json(rows[0])
         } catch (error) {
             res.status(500).json({

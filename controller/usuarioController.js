@@ -149,6 +149,18 @@ const usuarioController = {
                 msg: "ERROR usuarioController: " + error.message
             });
         }
+    },
+
+    getAllAdmins: async(req, res) =>{
+        try {
+            const sql = 'SELECT * FROM tb_usuarioadmin ORDER BY idusuario'
+            const { rows } = await pool(sql)
+            res.json(rows)
+        } catch (error) {
+            res.status(500).json({
+                msg: "ERROR usuarioController: " + error.message
+            });
+        }
     }
 
 }

@@ -6,6 +6,7 @@ const usuarioRouter = require('./routers/usuarioRouter')
 const boletoRouter = require('./routers/boletoRouter')
 const adminUsuarioRouter = require('./routers/adminUsuarioRouter')
 const ventaRouter = require('./routers/ventaRouter')
+const salaRouter = require('./routers/salaRouter')
 
 app.use(cors())
 app.use(express.json())
@@ -16,6 +17,7 @@ app.use("/usuario", usuarioRouter)
 app.use("/boleto", boletoRouter)
 app.use("/admin", adminUsuarioRouter)
 app.use("/venta", ventaRouter)
+app.use("/sala", salaRouter)
 
 const PORT = 3000
 

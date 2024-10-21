@@ -75,18 +75,24 @@ const boletoController = {
     },
 
     searchComprasByUser: async (req, res) =>{
-        const sql = `
-        SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos
-        FROM tb_boletoEntrada be
-        JOIN tb_pelicula p ON p.idpelicula = be.idpelicula
-        JOIN tb_detalleventa dv ON dv.idboleto = be.idboleto
-        JOIN tb_venta v ON v.idventa = dv.idventa
-        WHERE idusuario = $1
-        ORDER BY fecha DESC
+        try {
+            const sql = `
+            SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos
+            FROM tb_boletoEntrada be
+            JOIN tb_pelicula p ON p.idpelicula = be.idpelicula
+            JOIN tb_detalleventa dv ON dv.idboleto = be.idboleto
+            JOIN tb_venta v ON v.idventa = dv.idventa
+            WHERE idusuario = $1
+            ORDER BY fecha DESC
         `
         const { rows } = await pool.query(sql, [req.params.id])
         
         res.json(rows)
+        } catch (error) {
+            res.status(500).json({
+                msg: "ERROR boletoController: " + error.message
+            });
+        }
     }
 
 }

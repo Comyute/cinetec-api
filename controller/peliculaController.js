@@ -43,7 +43,9 @@ const peliculaController = {
             const { rows } = await pool.query(sql, [idpelicula, nombre, descripcion, generos, restriccion])
             res.json(rows)
         } catch (error) {
-            
+            res.status(500).json({
+                msg: "ERROR peliculaController: " + error.message
+            });
         }
     }
 }

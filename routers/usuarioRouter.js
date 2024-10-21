@@ -13,5 +13,6 @@ router.put("/editarusuario/", usuarioController.updateById)
 router.put("/deshabilitar/:id", usuarioController.disableUser)
 router.get("/buscar/:id", usuarioController.findById)
 router.get("/registraradmin/",usuarioController.createAdmin)
+router.get("/listaradmin/", usuarioController.getAllAdmins)
 
 module.exports = router

@@ -39,7 +39,7 @@ const peliculaController = {
     create: async(req, res) =>{
         try {
             const { idpelicula, nombre, descripcion, generos, restriccion } = req.body
-            const sql = 'INSERT tb_pelicula(idpelicula, nombre, descripcion, generos, restriccion) VALUES ($1,$2,$3,$4,$5) RETURNING *'
+            const sql = 'INSERT INTO tb_pelicula(idpelicula, nombre, descripcion, generos, restriccion) VALUES ($1,$2,$3,$4,$5) RETURNING *'
             const { rows } = await pool.query(sql, [idpelicula, nombre, descripcion, generos, restriccion])
             res.json(rows)
         } catch (error) {

@@ -3,6 +3,9 @@ const app = express()
 const cors = require("cors")
 const peliculaRouter = require('./routers/peliculaRouter')
 const usuarioRouter = require('./routers/usuarioRouter')
+const boletoRouter = require('./routers/boletoRouter')
+const adminUsuarioRouter = require('./routers/adminUsuarioRouter')
+const ventaRouter = require('./routers/ventaRouter')
 
 app.use(cors())
 app.use(express.json())
@@ -10,6 +13,9 @@ app.use(express.urlencoded())
 
 app.use("/pelicula", peliculaRouter)
 app.use("/usuario", usuarioRouter)
+app.use("/boleto", boletoRouter)
+app.use("/admin", adminUsuarioRouter)
+app.use("/venta", ventaRouter)
 
 const PORT = 3000
 

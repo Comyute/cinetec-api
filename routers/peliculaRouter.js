@@ -6,6 +6,7 @@ const peliculaController = require('../controller/peliculaController')
 router.get("/listar/", peliculaController.getAll)
 
 router.get("/buscar/:id", peliculaController.getById)
+router.post("/registrar/", peliculaController.create)
 router.get("/buscarpelicula/:text", peliculaController.searchByText)
 
 module.exports = router

@@ -37,8 +37,8 @@ const boletoController = {
             await pool.query('BEGIN')
 
             //tb_boletoEntrada insert
-            const anioActual = new Date().getFullYear();
-            const fechaanio = `${fecha}-${anioActual}`
+            const [day, month, year] = fecha.split('-')
+            const fechaanio = `${year}-${month}-${day}`
 
             const boletoQuery = `
             INSERT INTO tb_boletoEntrada (idpelicula, idsala, horario, fecha, asientos, cantidad) 

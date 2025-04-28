@@ -16,6 +16,7 @@ pool.connect((err) =>{
     console.log("Coneccion a PostgreSQL correcta")
 })
 
+/*
 const initBD = async() =>{
   const usuarioTB = `
   CREATE TABLE IF NOT EXISTS tb_usuario(
@@ -107,4 +108,6 @@ const initBD = async() =>{
 }
 
 initBD()
+*/
+
 module.exports = pool

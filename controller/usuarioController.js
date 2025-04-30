@@ -90,9 +90,7 @@ const usuarioController = {
             const { idusuario, nombres, apellidos, correo, contrasenia } = req.body
             const sql = 'UPDATE tb_usuario SET nombres=$1, apellidos=$2, correo=$3, contrasenia=$4, activa=true WHERE idusuario=$5'
             const { rows } = await pool.query(sql, [nombres, apellidos, correo, contrasenia, idusuario])
-            res.json({
-                msg: "Actualizado con exito"
-            })
+            res.json("Actualizado correctamente")
         } catch (error) {
             res.status(500).json({
                 msg: "ERROR usuarioController: " + error.message

@@ -30,9 +30,20 @@ const boletoController = {
         try {
             
             const { idusuario, idpelicula, horario, fecha, asientos, cantidad} = req.body
-            const salaQuery = 'SELECT SUBSTRING(idpelicula, LENGTH(idpelicula), 1) AS letra FROM tb_pelicula WHERE idpelicula = $1 ORDER BY idpelicula DESC LIMIT 1'
+            const salaQuery = `
+            SELECT 
+            CASE 
+                WHEN RIGHT(CAST(idpelicula AS TEXT), 1) = '0' THEN '1'
+                ELSE RIGHT(CAST(idpelicula AS TEXT), 1)
+            END AS ultimo_digito
+            FROM tb_pelicula
+            WHERE idpelicula = 6
+            ORDER BY idpelicula DESC
+            LIMIT 1;
+            `
+
             const salaResult = await pool.query(salaQuery, [idpelicula])
-            const idsala = salaResult.rows[0].letra
+            const idsala = salaResult.rows[0].num
 
             await pool.query('BEGIN')
 
@@ -63,9 +74,7 @@ const boletoController = {
 
             await pool.query('COMMIT')
 
-            res.json({
-                message: 'compraBoleto OK'
-            })
+            res.json("Boleto comprado con exito")
 
         } catch (error) {
             await pool.query('ROLLBACK')

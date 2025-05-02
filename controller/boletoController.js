@@ -35,9 +35,9 @@ const boletoController = {
             CASE 
                 WHEN RIGHT(CAST(idpelicula AS TEXT), 1) = '0' THEN '1'
                 ELSE RIGHT(CAST(idpelicula AS TEXT), 1)
-            END AS ultimo_digito
+            END AS num
             FROM tb_pelicula
-            WHERE idpelicula = 6
+            WHERE idpelicula = $1
             ORDER BY idpelicula DESC
             LIMIT 1;
             `
@@ -87,7 +87,7 @@ const boletoController = {
     searchComprasByUser: async (req, res) =>{
         try {
             const sql = `
-            SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos
+            SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos, p.linkportada
             FROM tb_boletoEntrada be
             JOIN tb_pelicula p ON p.idpelicula = be.idpelicula
             JOIN tb_detalleventa dv ON dv.idboleto = be.idboleto

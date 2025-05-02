@@ -109,7 +109,6 @@ const usuarioController = {
 
             const nombres = usuarioActual.nombres
             const apellidos = usuarioActual.apellidos
-            const correo = usuarioActual.correo
             const contrasenia = usuarioActual.contrasenia
 
             const qDeshabilitar = `UPDATE tb_usuario SET nombres=$1, apellidos=$2, correo=NULL, contrasenia=$3, activa=false WHERE idusuario=$4 RETURNING *`

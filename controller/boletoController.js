@@ -53,8 +53,8 @@ const boletoController = {
             const fechaanio = `${anioActual}-${month}-${day}`
 
             const boletoQuery = `
-            INSERT INTO tb_boletoEntrada (idpelicula, idsala, horario, fecha, asientos, cantidad) 
-            VALUES ($1, $2, $3, $4, $5, $6) 
+            INSERT INTO tb_boletoEntrada (idpelicula, idsala, horario, fecha, asientos, cantidad, visible) 
+            VALUES ($1, $2, $3, $4, $5, $6, TRUE) 
             RETURNING idboleto
             `
 
@@ -87,7 +87,7 @@ const boletoController = {
     searchComprasByUser: async (req, res) =>{
         try {
             const sql = `
-            SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos, p.linkportada
+            SELECT be.idboleto, p.idpelicula, p.nombre, p.generos, p.restriccion, be.idsala, TO_CHAR(be.fecha, 'DD-MM-YYYY') AS fecha, be.horario, be.asientos, p.linkportada, be.visible
             FROM tb_boletoEntrada be
             JOIN tb_pelicula p ON p.idpelicula = be.idpelicula
             JOIN tb_detalleventa dv ON dv.idboleto = be.idboleto

@@ -1,3 +1,4 @@
+const { rows } = require('pg/lib/defaults')
 const pool = require('../database')
 
 const boletoController = {
@@ -102,6 +103,21 @@ const boletoController = {
             res.status(500).json({
                 msg: "ERROR boletoController: " + error.message
             });
+        }
+    },
+
+    disableBoleto: async(req, res) =>{
+        try {
+            const { idboleto } = req.body
+
+            const qDeshabilitar = `UPDATE tb_boletoentrada be SET visible = false WHERE be.idboleto = $1 RETURNING *`
+            const { rows } = await pool.query(qDeshabilitar, [idboleto])
+
+            res.json("Boleto " + rows[0].idboleto + " no visible")
+        } catch (error) {
+            res.status(500).json({
+                msg: "ERROR boletoController: " + error.message
+            })
         }
     }
 

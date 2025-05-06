@@ -7,6 +7,6 @@ router.get("/listar/", boletoController.getAll)
 router.post("/registrar/", boletoController.create)
 router.post("/comprarboleto/", boletoController.compraBoleto)
 router.get("/buscarcompras/:id", boletoController.searchComprasByUser)
-router.post("/eliminarcompra/", boletoController.disableBoleto)
+router.put("/eliminarcompra/", boletoController.disableBoleto)
 
 module.exports = router
